@@ -10,7 +10,8 @@ import CombatAchievementsTab from './components/CombatAchievementsTab';
 import CollectionLogTab from './components/CollectionLogTab';
 import ImportModal from './components/ImportModal';
 
-import { Shield, Zap, Package, Database, Scroll, BookOpen, Trophy, Compass, LayoutDashboard } from 'lucide-react';
+import { Shield, Zap, Package, Database, Scroll, BookOpen, Trophy, Compass, LayoutDashboard, ExternalLink } from 'lucide-react';
+
 
 export default function App() {
   const [accounts, setAccounts] = useState([]);
@@ -224,6 +225,33 @@ export default function App() {
           </>
         )}
       </main>
+
+      {/* Footer */}
+      <footer style={{ marginTop: '2.5rem', textAlign: 'center', color: 'var(--color-text-dim)', fontSize: '0.8rem', padding: '1.5rem 0', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <p style={{ margin: 0 }}>OSRS Character Visualizer • Knowledge and guides powered by the official Old School RuneScape Wiki</p>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1.5rem', marginTop: '0.6rem', flexWrap: 'wrap' }}>
+          <a
+            href="https://oldschool.runescape.wiki/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: 'var(--color-gold)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.35rem', fontWeight: 600 }}
+          >
+            <ExternalLink size={13} /> Official OSRS Wiki
+          </a>
+          <a href="https://oldschool.runescape.wiki/w/Quests/Guides" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-text-muted)', textDecoration: 'none' }}>
+            Quest Guides
+          </a>
+          <a href="https://oldschool.runescape.wiki/w/Achievement_Diary" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-text-muted)', textDecoration: 'none' }}>
+            Achievement Diaries
+          </a>
+          <a href="https://oldschool.runescape.wiki/w/Combat_Achievements" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-text-muted)', textDecoration: 'none' }}>
+            Combat Achievements
+          </a>
+          <a href="https://oldschool.runescape.wiki/w/Collection_Log" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-text-muted)', textDecoration: 'none' }}>
+            Collection Log
+          </a>
+        </div>
+      </footer>
 
       {/* Import Modal */}
       <ImportModal

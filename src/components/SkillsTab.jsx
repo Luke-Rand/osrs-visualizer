@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { OSRS_SKILLS, getSkillProgress, formatNumber, formatQuantity } from '../utils/osrsUtils';
-import { Zap, Award, Sparkles, TrendingUp, CheckCircle } from 'lucide-react';
+import { OSRS_SKILLS, getSkillProgress, formatNumber, formatQuantity, getWikiUrl } from '../utils/osrsUtils';
+import { Zap, Award, Sparkles, TrendingUp, CheckCircle, ExternalLink } from 'lucide-react';
+
 
 export default function SkillsTab({ character }) {
   const stats = character?.stats || {};
@@ -136,14 +137,27 @@ export default function SkillsTab({ character }) {
 
       {/* Selected Skill Detail Inspector Panel */}
       <div className="glass-panel skills-side-col" style={{ padding: '1.5rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1rem', marginBottom: '1.25rem' }}>
-          <img src={skillMeta.icon} alt={selectedSkill} style={{ width: '36px', height: '36px' }} />
-          <div>
-            <h3 style={{ fontSize: '1.4rem', margin: 0 }}>{selectedSkill}</h3>
-            <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', textTransform: 'capitalize' }}>
-              {skillMeta.category} Skill
-            </span>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1rem', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <img src={skillMeta.icon} alt={selectedSkill} style={{ width: '36px', height: '36px' }} />
+            <div>
+              <h3 style={{ fontSize: '1.4rem', margin: 0 }}>{selectedSkill}</h3>
+              <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', textTransform: 'capitalize' }}>
+                {skillMeta.category} Skill
+              </span>
+            </div>
           </div>
+
+          <a
+            href={getWikiUrl(selectedSkill)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="wiki-btn"
+            title={`View ${selectedSkill} training guide on OSRS Wiki`}
+          >
+            <span>Wiki Guide</span>
+            <ExternalLink size={13} />
+          </a>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>

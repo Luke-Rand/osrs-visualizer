@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { EQUIPMENT_SLOTS, getItemIconUrl, formatQuantity } from '../utils/osrsUtils';
-import { Shield, Package, Info } from 'lucide-react';
+import { EQUIPMENT_SLOTS, getItemIconUrl, formatQuantity, getWikiUrl } from '../utils/osrsUtils';
+import { Shield, Package, Info, ExternalLink } from 'lucide-react';
+
 
 export default function EquipmentInventoryTab({ equipment, inventory }) {
   const [hoveredItem, setHoveredItem] = useState(null);
@@ -144,16 +145,29 @@ export default function EquipmentInventoryTab({ equipment, inventory }) {
         </div>
 
         {/* Hovered/Selected Item Info Bar */}
-        <div style={{ marginTop: '1.5rem', background: 'rgba(0,0,0,0.3)', padding: '0.85rem', borderRadius: '8px', border: '1px solid rgba(229,192,123,0.1)', minHeight: '60px', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ marginTop: '1.5rem', background: 'rgba(0,0,0,0.3)', padding: '0.85rem', borderRadius: '8px', border: '1px solid rgba(229,192,123,0.1)', minHeight: '60px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.75rem' }}>
           {hoveredItem ? (
             <>
-              <img src={getItemIconUrl(hoveredItem.id)} alt={hoveredItem.name} style={{ width: '32px', height: '32px' }} />
-              <div>
-                <div style={{ fontWeight: 600, color: 'var(--color-gold)', fontSize: '0.9rem' }}>{hoveredItem.name}</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
-                  ID: {hoveredItem.id} • Quantity: {hoveredItem.quantity.toLocaleString()}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <img src={getItemIconUrl(hoveredItem.id)} alt={hoveredItem.name} style={{ width: '32px', height: '32px' }} />
+                <div>
+                  <div style={{ fontWeight: 600, color: 'var(--color-gold)', fontSize: '0.9rem' }}>{hoveredItem.name}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
+                    ID: {hoveredItem.id} • Quantity: {hoveredItem.quantity.toLocaleString()}
+                  </div>
                 </div>
               </div>
+
+              <a
+                href={getWikiUrl(hoveredItem.name)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="wiki-btn"
+                title={`View ${hoveredItem.name} on OSRS Wiki`}
+              >
+                <span>Wiki</span>
+                <ExternalLink size={12} />
+              </a>
             </>
           ) : (
             <div style={{ fontSize: '0.8rem', color: 'var(--color-text-dim)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>

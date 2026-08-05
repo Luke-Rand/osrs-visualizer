@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { Scroll, Search, CheckCircle2, Clock, XCircle } from 'lucide-react';
+import { Scroll, Search, CheckCircle2, Clock, XCircle, ExternalLink } from 'lucide-react';
+import { getWikiUrl } from '../utils/osrsUtils';
 
 export default function QuestsTab({ quests }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,7 +29,19 @@ export default function QuestsTab({ quests }) {
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <Scroll color="var(--color-gold)" size={28} />
             <div>
-              <h2 style={{ fontSize: '1.4rem', margin: 0 }}>Quest Progress</h2>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <h2 style={{ fontSize: '1.4rem', margin: 0 }}>Quest Progress</h2>
+                <a
+                  href="https://oldschool.runescape.wiki/w/Quests/Guides"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="wiki-btn"
+                  title="View Quest Guides on OSRS Wiki"
+                >
+                  <span>Quest Guides</span>
+                  <ExternalLink size={12} />
+                </a>
+              </div>
               <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
                 {summary.finished} Finished • {summary.in_progress} In Progress • {summary.not_started} Unstarted
               </div>
@@ -119,8 +132,19 @@ export default function QuestsTab({ quests }) {
                   gap: '0.5rem'
                 }}
               >
-                <div style={{ fontSize: '0.9rem', fontWeight: 500, color: isFinished ? '#fff' : 'var(--color-text-muted)' }}>
-                  {quest.name}
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                  <span style={{ fontSize: '0.9rem', fontWeight: 500, color: isFinished ? '#fff' : 'var(--color-text-muted)' }}>
+                    {quest.name}
+                  </span>
+                  <a
+                    href={getWikiUrl(quest.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="wiki-link-icon"
+                    title={`View ${quest.name} on OSRS Wiki`}
+                  >
+                    <ExternalLink size={13} />
+                  </a>
                 </div>
 
                 <div>

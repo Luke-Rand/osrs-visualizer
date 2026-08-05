@@ -154,3 +154,15 @@ export function formatNumber(num) {
   if (num === null || num === undefined) return '0';
   return num.toLocaleString();
 }
+
+export function getWikiUrl(pageName) {
+  if (!pageName) return 'https://oldschool.runescape.wiki/';
+  const formatted = encodeURIComponent(pageName.trim().replace(/ /g, '_'));
+  return `https://oldschool.runescape.wiki/w/${formatted}`;
+}
+
+export function getWikiSearchUrl(query) {
+  if (!query) return 'https://oldschool.runescape.wiki/';
+  return `https://oldschool.runescape.wiki/w/Special:Search?search=${encodeURIComponent(query.trim())}`;
+}
+

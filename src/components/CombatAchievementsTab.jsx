@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Trophy, CheckCircle2, Search, Filter } from 'lucide-react';
+import { Trophy, CheckCircle2, Search, Filter, ExternalLink } from 'lucide-react';
+import { getWikiSearchUrl, getWikiUrl } from '../utils/osrsUtils';
 
 export default function CombatAchievementsTab({ combatAchievements }) {
   const [selectedTier, setSelectedTier] = useState('easy');
@@ -28,7 +29,19 @@ export default function CombatAchievementsTab({ combatAchievements }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <Trophy color="var(--tier-hard)" size={28} />
           <div>
-            <h2 style={{ fontSize: '1.4rem', margin: 0 }}>Combat Achievements</h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <h2 style={{ fontSize: '1.4rem', margin: 0 }}>Combat Achievements</h2>
+              <a
+                href="https://oldschool.runescape.wiki/w/Combat_Achievements"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="wiki-btn"
+                title="View Combat Achievements Guide on OSRS Wiki"
+              >
+                <span>CA Wiki</span>
+                <ExternalLink size={12} />
+              </a>
+            </div>
             <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
               Boss mechanics, speedruns, and combat challenges across 6 difficulty tiers
             </div>
@@ -139,8 +152,19 @@ export default function CombatAchievementsTab({ combatAchievements }) {
                 justifyContent: 'space-between'
               }}
             >
-              <div style={{ fontSize: '0.85rem', fontWeight: 500, color: task.complete ? '#fff' : 'var(--color-text-muted)' }}>
-                {task.name}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <span style={{ fontSize: '0.85rem', fontWeight: 500, color: task.complete ? '#fff' : 'var(--color-text-muted)' }}>
+                  {task.name}
+                </span>
+                <a
+                  href={getWikiSearchUrl(task.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="wiki-link-icon"
+                  title={`Search ${task.name} on OSRS Wiki`}
+                >
+                  <ExternalLink size={13} />
+                </a>
               </div>
 
               {task.complete ? (

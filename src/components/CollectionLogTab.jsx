@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Compass, Sparkles, AlertCircle } from 'lucide-react';
-import { getItemIconUrl } from '../utils/osrsUtils';
+import { Compass, Sparkles, AlertCircle, ExternalLink } from 'lucide-react';
+import { getItemIconUrl, getWikiUrl } from '../utils/osrsUtils';
 
 export default function CollectionLogTab({ collectionLog }) {
   const tabs = collectionLog?.tabs || {};
@@ -30,7 +30,19 @@ export default function CollectionLogTab({ collectionLog }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <Compass color="var(--tier-elite)" size={28} />
           <div>
-            <h2 style={{ fontSize: '1.4rem', margin: 0 }}>Collection Log</h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <h2 style={{ fontSize: '1.4rem', margin: 0 }}>Collection Log</h2>
+              <a
+                href="https://oldschool.runescape.wiki/w/Collection_Log"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="wiki-btn"
+                title="View Collection Log Guide on OSRS Wiki"
+              >
+                <span>Log Wiki</span>
+                <ExternalLink size={12} />
+              </a>
+            </div>
             <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
               Scraped in-game log entries ({collectionLog?.entries_scraped || 0} pages recorded)
             </div>
@@ -108,16 +120,34 @@ export default function CollectionLogTab({ collectionLog }) {
           {/* Item Grid Display */}
           <div className="glass-panel collection-log-main" style={{ padding: '1.5rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
-              <h3 style={{ fontSize: '1.2rem', margin: 0 }}>{selectedCategory}</h3>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <h3 style={{ fontSize: '1.2rem', margin: 0 }}>{selectedCategory}</h3>
+                {selectedCategory && (
+                  <a
+                    href={getWikiUrl(selectedCategory)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="wiki-btn"
+                    style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem' }}
+                    title={`View ${selectedCategory} on OSRS Wiki`}
+                  >
+                    <span>Wiki</span>
+                    <ExternalLink size={11} />
+                  </a>
+                )}
+              </div>
               <span className="badge badge-gold">
                 Obtained: {currentCategoryData.obtained_count} / {currentCategoryData.total_items}
               </span>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(90px, 1fr))', gap: '0.75rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(95px, 1fr))', gap: '0.75rem' }}>
               {items.map(item => (
-                <div
+                <a
                   key={item.id}
+                  href={getWikiUrl(item.name)}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
                     background: item.obtained ? 'rgba(78, 175, 84, 0.12)' : 'rgba(0,0,0,0.3)',
                     border: item.obtained ? '1px solid rgba(78, 175, 84, 0.4)' : '1px solid rgba(255,255,255,0.05)',
@@ -125,8 +155,11 @@ export default function CollectionLogTab({ collectionLog }) {
                     borderRadius: '8px',
                     textAlign: 'center',
                     opacity: item.obtained ? 1 : 0.45,
-                    transition: 'all 0.15s ease'
+                    transition: 'all 0.15s ease',
+                    textDecoration: 'none',
+                    display: 'block'
                   }}
+                  title={`View ${item.name} on OSRS Wiki`}
                 >
                   <img
                     src={getItemIconUrl(item.id)}
@@ -136,7 +169,7 @@ export default function CollectionLogTab({ collectionLog }) {
                   <div style={{ fontSize: '0.75rem', color: item.obtained ? '#fff' : 'var(--color-text-dim)', marginTop: '0.4rem', lineHeight: '1.2' }}>
                     {item.name}
                   </div>
-                </div>
+                </a>
               ))}
             </div>
           </div>

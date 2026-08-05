@@ -1,6 +1,6 @@
 import React from 'react';
-import { Shield, Sword, Award, Scroll, BookOpen, Trophy, Compass, Sparkles, Target } from 'lucide-react';
-import { calculateCombatDetails, getItemIconUrl, EQUIPMENT_SLOTS, formatNumber } from '../utils/osrsUtils';
+import { Shield, Sword, Award, Scroll, BookOpen, Trophy, Compass, Sparkles, Target, ExternalLink } from 'lucide-react';
+import { calculateCombatDetails, getItemIconUrl, EQUIPMENT_SLOTS, formatNumber, getWikiUrl } from '../utils/osrsUtils';
 
 export default function OverviewTab({ character, equipment, quests, diaries, combatAchievements, collectionLog, onNavigateTab }) {
   const stats = character?.stats || {};
@@ -23,8 +23,21 @@ export default function OverviewTab({ character, equipment, quests, diaries, com
             <Sword color="var(--color-gold)" size={24} />
             <h2 style={{ fontSize: '1.3rem', margin: 0 }}>Combat Breakdown</h2>
           </div>
-          <div className="badge badge-gold" style={{ fontSize: '0.85rem' }}>
-            Level {combatDetails.combatLevel} ({combatDetails.maxStyle} Focus)
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+            <div className="badge badge-gold" style={{ fontSize: '0.85rem' }}>
+              Level {combatDetails.combatLevel} ({combatDetails.maxStyle} Focus)
+            </div>
+            <a
+              href="https://oldschool.runescape.wiki/w/Combat_level"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="wiki-btn"
+              style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem' }}
+              title="View Combat Level Formula on OSRS Wiki"
+            >
+              <span>Combat Wiki</span>
+              <ExternalLink size={11} />
+            </a>
           </div>
         </div>
 
@@ -38,10 +51,17 @@ export default function OverviewTab({ character, equipment, quests, diaries, com
             { name: 'Prayer', val: combatDetails.pray, color: '#f1c40f' },
             { name: 'Magic', val: combatDetails.mage, color: '#9b59b6' }
           ].map(s => (
-            <div key={s.name} style={{ background: 'rgba(0,0,0,0.3)', padding: '0.75rem 0.5rem', borderRadius: '8px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.05)' }}>
+            <a
+              key={s.name}
+              href={getWikiUrl(s.name)}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ background: 'rgba(0,0,0,0.3)', padding: '0.75rem 0.5rem', borderRadius: '8px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.05)', textDecoration: 'none', display: 'block' }}
+              title={`View ${s.name} guide on OSRS Wiki`}
+            >
               <div style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginBottom: '0.2rem' }}>{s.name}</div>
               <div style={{ fontSize: '1.4rem', fontWeight: 700, color: s.color, fontFamily: 'var(--font-mono)' }}>{s.val}</div>
-            </div>
+            </a>
           ))}
         </div>
 
@@ -87,10 +107,15 @@ export default function OverviewTab({ character, equipment, quests, diaries, com
             return (
               <div key={slot.slot} className="item-slot" title={item ? `${item.name} (${item.quantity})` : slot.name}>
                 {item ? (
-                  <>
+                  <a
+                    href={getWikiUrl(item.name)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}
+                  >
                     <img src={getItemIconUrl(item.id)} alt={item.name} onError={(e) => { e.target.style.display = 'none'; }} />
                     {item.quantity > 1 && <span className="qty">{item.quantity}</span>}
-                  </>
+                  </a>
                 ) : (
                   <span style={{ fontSize: '0.65rem', color: 'var(--color-text-dim)' }}>{slot.name[0]}</span>
                 )}
@@ -181,6 +206,61 @@ export default function OverviewTab({ character, equipment, quests, diaries, com
         </div>
       </div>
 
+      {/* 4. OSRS Wiki Quick Resources Hub */}
+      <div className="glass-panel overview-full-col" style={{ padding: '1.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <ExternalLink color="var(--color-gold)" size={22} />
+            <h3 style={{ fontSize: '1.2rem', margin: 0 }}>Official OSRS Wiki Quick Links</h3>
+          </div>
+          <a
+            href="https://oldschool.runescape.wiki/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="wiki-btn"
+          >
+            <span>Visit OSRS Wiki Main Page</span>
+            <ExternalLink size={13} />
+          </a>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '0.75rem' }}>
+          {[
+            { name: 'Skill Training Guides', url: 'https://oldschool.runescape.wiki/w/Skill_training_guides' },
+            { name: 'Quest Experience Rewards', url: 'https://oldschool.runescape.wiki/w/Quest_experience_rewards' },
+            { name: 'Optimal Quest Guide', url: 'https://oldschool.runescape.wiki/w/Optimal_quest_guide' },
+            { name: 'Bossing & PvM Guides', url: 'https://oldschool.runescape.wiki/w/Boss' },
+            { name: 'Money Making Guides', url: 'https://oldschool.runescape.wiki/w/Money_making_guide' },
+            { name: 'Calculators & Tools', url: 'https://oldschool.runescape.wiki/w/Calculators' }
+          ].map(res => (
+            <a
+              key={res.name}
+              href={res.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: 'rgba(0,0,0,0.3)',
+                padding: '0.75rem 1rem',
+                borderRadius: '8px',
+                border: '1px solid rgba(229,192,123,0.15)',
+                display: 'flex',
+                alignItems: 'center',
+                justify: 'space-between',
+                color: 'var(--color-text-main)',
+                fontSize: '0.85rem',
+                textDecoration: 'none',
+                transition: 'all 0.2s ease'
+              }}
+              className="hover-card"
+            >
+              <span>{res.name}</span>
+              <ExternalLink size={14} color="var(--color-gold)" />
+            </a>
+          ))}
+        </div>
+      </div>
+
     </div>
   );
 }
+

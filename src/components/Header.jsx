@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
-import { User, Shield, Zap, RefreshCw, Upload, Sparkles, CheckCircle2, Globe, Database } from 'lucide-react';
-import { formatQuantity, formatNumber } from '../utils/osrsUtils';
+import { User, Shield, Zap, RefreshCw, Upload, Sparkles, CheckCircle2, Globe, Database, ExternalLink, Search, BookOpen } from 'lucide-react';
+import { formatQuantity, formatNumber, getWikiSearchUrl } from '../utils/osrsUtils';
 
 export default function Header({ accounts, currentAccount, onSelectAccount, onRefresh, isLive, onOpenImport }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [wikiQuery, setWikiQuery] = useState('');
+
+  const handleWikiSearch = (e) => {
+    e.preventDefault();
+    if (wikiQuery.trim()) {
+      window.open(getWikiSearchUrl(wikiQuery), '_blank', 'noopener,noreferrer');
+      setWikiQuery('');
+    }
+  };
+
 
   return (
     <header className="glass-panel" style={{ padding: '1.25rem 1.75rem', marginBottom: '1.5rem' }}>
@@ -150,7 +160,41 @@ export default function Header({ accounts, currentAccount, onSelectAccount, onRe
             </div>
           )}
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+            <form onSubmit={handleWikiSearch} style={{ position: 'relative', minWidth: '170px' }}>
+              <Search size={14} color="var(--color-text-muted)" style={{ position: 'absolute', left: '0.65rem', top: '50%', transform: 'translateY(-50%)' }} />
+              <input
+                type="text"
+                placeholder="Search OSRS Wiki..."
+                value={wikiQuery}
+                onChange={(e) => setWikiQuery(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '0.45rem 0.5rem 0.45rem 2rem',
+                  background: 'rgba(0,0,0,0.4)',
+                  border: '1px solid rgba(229,192,123,0.3)',
+                  borderRadius: '8px',
+                  color: '#fff',
+                  fontSize: '0.8rem',
+                  outline: 'none',
+                  minHeight: '38px'
+                }}
+              />
+            </form>
+
+            <a
+              href="https://oldschool.runescape.wiki/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="wiki-btn"
+              title="Open Official OSRS Wiki"
+              style={{ minHeight: '38px', textDecoration: 'none' }}
+            >
+              <BookOpen size={15} />
+              <span>OSRS Wiki</span>
+              <ExternalLink size={12} />
+            </a>
+
             <button
               onClick={onRefresh}
               className="glass-panel"

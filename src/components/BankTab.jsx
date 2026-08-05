@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { Database, Search, ArrowUpDown, Filter, Sparkles } from 'lucide-react';
-import { getItemIconUrl, formatQuantity, formatNumber } from '../utils/osrsUtils';
+import { Database, Search, ArrowUpDown, Filter, Sparkles, ExternalLink } from 'lucide-react';
+import { getItemIconUrl, formatQuantity, formatNumber, getWikiUrl } from '../utils/osrsUtils';
+
 
 export default function BankTab({ bank }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -161,6 +162,17 @@ export default function BankTab({ bank }) {
                 </div>
               </div>
             </div>
+
+            <a
+              href={getWikiUrl(selectedItem.name)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="wiki-btn"
+              style={{ width: '100%', justifyContent: 'center', padding: '0.6rem 1rem', marginTop: '0.25rem' }}
+            >
+              <span>View {selectedItem.name} on OSRS Wiki</span>
+              <ExternalLink size={14} />
+            </a>
           </div>
         ) : (
           <div style={{ padding: '2rem 1rem', textAlign: 'center', color: 'var(--color-text-dim)', fontSize: '0.85rem' }}>

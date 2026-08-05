@@ -1,5 +1,6 @@
 import React from 'react';
-import { BookOpen, CheckCircle, CheckCircle2 } from 'lucide-react';
+import { BookOpen, CheckCircle, CheckCircle2, ExternalLink } from 'lucide-react';
+import { getWikiUrl } from '../utils/osrsUtils';
 
 export default function DiariesTab({ diaries }) {
   const diaryData = diaries?.diaries || {};
@@ -15,7 +16,19 @@ export default function DiariesTab({ diaries }) {
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <BookOpen color="var(--tier-medium)" size={28} />
           <div>
-            <h2 style={{ fontSize: '1.4rem', margin: 0 }}>Achievement Diaries</h2>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <h2 style={{ fontSize: '1.4rem', margin: 0 }}>Achievement Diaries</h2>
+              <a
+                href="https://oldschool.runescape.wiki/w/Achievement_Diary"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="wiki-btn"
+                title="View Achievement Diary Guide on OSRS Wiki"
+              >
+                <span>Diary Wiki</span>
+                <ExternalLink size={12} />
+              </a>
+            </div>
             <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
               Track regional task completions across Easy, Medium, Hard, and Elite tiers
             </div>
@@ -45,7 +58,18 @@ export default function DiariesTab({ diaries }) {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '0.6rem' }}>
-                <h3 style={{ fontSize: '1.1rem', margin: 0, color: '#fff' }}>{regionName}</h3>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <h3 style={{ fontSize: '1.1rem', margin: 0, color: '#fff' }}>{regionName}</h3>
+                  <a
+                    href={getWikiUrl(`${regionName}_Diary`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="wiki-link-icon"
+                    title={`View ${regionName} Diary on OSRS Wiki`}
+                  >
+                    <ExternalLink size={13} />
+                  </a>
+                </div>
                 <span className={completedTiersCount === 4 ? "badge badge-easy" : "badge badge-gold"}>
                   {completedTiersCount} / 4 Tiers
                 </span>

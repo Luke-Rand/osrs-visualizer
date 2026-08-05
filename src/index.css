@@ -488,3 +488,45 @@ button:active {
   }
 }
 
+/* OSRS Wiki Link Styling */
+.wiki-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.8rem;
+  background: rgba(229, 192, 123, 0.12);
+  color: var(--color-gold);
+  border: 1px solid rgba(229, 192, 123, 0.3);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.wiki-btn:hover {
+  background: rgba(229, 192, 123, 0.25);
+  color: #fff;
+  border-color: var(--color-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(229, 192, 123, 0.2);
+}
+
+.wiki-link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  padding: 0.2rem;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+
+.wiki-link-icon:hover {
+  color: var(--color-gold);
+  background: rgba(229, 192, 123, 0.15);
+}
+
+
