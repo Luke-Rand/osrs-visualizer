@@ -172,7 +172,23 @@ docker compose up -d --build
 
 Access the app at **[http://localhost:3001/](http://localhost:3001/)**.
 
-### Option B: Docker CLI
+### Option B: Pull Pre-built Image from GHCR
+
+The repository includes an automated GitHub Actions pipeline (`.github/workflows/docker-publish.yml`) that builds multi-architecture images (`linux/amd64`, `linux/arm64`) on every push to `main` and publishes them to GitHub Container Registry (GHCR):
+
+```bash
+# Pull latest image from GHCR
+docker pull ghcr.io/<owner>/osrs-visualizer:latest
+
+# Run container
+docker run -d \
+  -p 3001:3001 \
+  -v ~/.runelite/character-exporter:/app/character-exporter \
+  --name osrs-visualizer \
+  ghcr.io/<owner>/osrs-visualizer:latest
+```
+
+### Option C: Build Image Locally with Docker CLI
 
 ```bash
 # Build Docker image
