@@ -7,10 +7,10 @@ export default function Header({ accounts, currentAccount, onSelectAccount, onRe
 
   return (
     <header className="glass-panel" style={{ padding: '1.25rem 1.75rem', marginBottom: '1.5rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+      <div className="header-main-flex" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
         
         {/* Left: Branding & Account Selector */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
           <div 
             style={{
               width: '52px',
@@ -21,14 +21,15 @@ export default function Header({ accounts, currentAccount, onSelectAccount, onRe
               alignItems: 'center',
               justifyContent: 'center',
               boxShadow: '0 4px 16px rgba(229, 192, 123, 0.3)',
-              border: '1px solid rgba(255,255,255,0.2)'
+              border: '1px solid rgba(255,255,255,0.2)',
+              flexShrink: 0
             }}
           >
             <Shield size={28} color="#0d0f17" />
           </div>
 
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
               <h1 style={{ fontSize: '1.6rem', margin: 0, fontWeight: 700, letterSpacing: '0.5px' }}>
                 {currentAccount ? currentAccount.name : 'OSRS Visualizer'}
               </h1>
@@ -39,7 +40,7 @@ export default function Header({ accounts, currentAccount, onSelectAccount, onRe
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     className="badge badge-gold"
-                    style={{ padding: '0.3rem 0.7rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                    style={{ padding: '0.45rem 0.8rem', display: 'flex', alignItems: 'center', gap: '0.4rem', minHeight: '36px' }}
                   >
                     <span>Switch Account ({accounts.length})</span>
                     <span style={{ fontSize: '0.7rem' }}>▼</span>
@@ -54,6 +55,7 @@ export default function Header({ accounts, currentAccount, onSelectAccount, onRe
                         left: 0,
                         zIndex: 100,
                         minWidth: '220px',
+                        maxWidth: '90vw',
                         padding: '0.5rem',
                         background: '#121622',
                         border: '1px solid rgba(229,192,123,0.3)',
@@ -96,7 +98,7 @@ export default function Header({ accounts, currentAccount, onSelectAccount, onRe
               )}
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '0.3rem', fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.3rem', fontSize: '0.85rem', color: 'var(--color-text-muted)', flexWrap: 'wrap' }}>
               {currentAccount?.world && (
                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
                   <Globe size={14} color="var(--color-gold)" /> World {currentAccount.world}
@@ -120,28 +122,28 @@ export default function Header({ accounts, currentAccount, onSelectAccount, onRe
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
           
           {currentAccount && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'rgba(0,0,0,0.3)', padding: '0.5rem 1rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
-              <div style={{ textAlign: 'center', padding: '0 0.5rem' }}>
-                <div style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>Combat</div>
-                <div style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-gold)', fontFamily: 'var(--font-mono)' }}>
+            <div className="header-stats-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: 'rgba(0,0,0,0.3)', padding: '0.5rem 0.85rem', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <div style={{ textAlign: 'center', padding: '0 0.35rem' }}>
+                <div style={{ fontSize: '0.65rem', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>Combat</div>
+                <div style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--color-gold)', fontFamily: 'var(--font-mono)' }}>
                   {currentAccount.combatLevel}
                 </div>
               </div>
 
-              <div style={{ width: '1px', height: '28px', background: 'rgba(255,255,255,0.1)' }} />
+              <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.1)' }} />
 
-              <div style={{ textAlign: 'center', padding: '0 0.5rem' }}>
-                <div style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>Total Lvl</div>
-                <div style={{ fontSize: '1.25rem', fontWeight: 700, color: '#fff', fontFamily: 'var(--font-mono)' }}>
+              <div style={{ textAlign: 'center', padding: '0 0.35rem' }}>
+                <div style={{ fontSize: '0.65rem', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>Total Lvl</div>
+                <div style={{ fontSize: '1.15rem', fontWeight: 700, color: '#fff', fontFamily: 'var(--font-mono)' }}>
                   {formatNumber(currentAccount.totalLevel)}
                 </div>
               </div>
 
-              <div style={{ width: '1px', height: '28px', background: 'rgba(255,255,255,0.1)' }} />
+              <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.1)' }} />
 
-              <div style={{ textAlign: 'center', padding: '0 0.5rem' }}>
-                <div style={{ fontSize: '0.7rem', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>Total XP</div>
-                <div style={{ fontSize: '1.1rem', fontWeight: 600, color: 'var(--color-gold)', fontFamily: 'var(--font-mono)' }}>
+              <div style={{ textAlign: 'center', padding: '0 0.35rem' }}>
+                <div style={{ fontSize: '0.65rem', color: 'var(--color-text-muted)', textTransform: 'uppercase' }}>Total XP</div>
+                <div style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--color-gold)', fontFamily: 'var(--font-mono)' }}>
                   {formatQuantity(currentAccount.totalXp)}
                 </div>
               </div>
@@ -159,7 +161,8 @@ export default function Header({ accounts, currentAccount, onSelectAccount, onRe
                 alignItems: 'center',
                 gap: '0.5rem',
                 color: 'var(--color-text-main)',
-                fontSize: '0.85rem'
+                fontSize: '0.85rem',
+                minHeight: '42px'
               }}
             >
               <RefreshCw size={16} className={isLive ? 'animate-spin' : ''} />
@@ -175,7 +178,8 @@ export default function Header({ accounts, currentAccount, onSelectAccount, onRe
                 fontSize: '0.85rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.5rem'
+                gap: '0.5rem',
+                minHeight: '42px'
               }}
             >
               <Upload size={16} />

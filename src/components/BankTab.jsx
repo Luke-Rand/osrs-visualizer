@@ -34,7 +34,7 @@ export default function BankTab({ bank }) {
   }, [rawItems, searchTerm, sortBy]);
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem' }}>
+    <div className="bank-layout">
       
       {/* Header & Controls Bar */}
       <div className="glass-panel" style={{ gridColumn: 'span 12', padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
@@ -50,7 +50,7 @@ export default function BankTab({ bank }) {
 
         {/* Controls: Search & Sort */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-          <div style={{ position: 'relative', minWidth: '240px' }}>
+          <div style={{ position: 'relative', flex: '1 1 200px', minWidth: '180px' }}>
             <Search size={16} color="var(--color-text-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
             <input
               type="text"
@@ -70,7 +70,7 @@ export default function BankTab({ bank }) {
             />
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(0,0,0,0.3)', padding: '0.25rem 0.5rem', borderRadius: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(0,0,0,0.3)', padding: '0.25rem 0.5rem', borderRadius: '8px', flexWrap: 'wrap' }}>
             <ArrowUpDown size={14} color="var(--color-gold)" />
             <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>Sort:</span>
             {[
@@ -87,7 +87,8 @@ export default function BankTab({ bank }) {
                   fontSize: '0.75rem',
                   fontWeight: sortBy === s.id ? 600 : 400,
                   background: sortBy === s.id ? 'var(--color-gold)' : 'transparent',
-                  color: sortBy === s.id ? '#0d1017' : 'var(--color-text-main)'
+                  color: sortBy === s.id ? '#0d1017' : 'var(--color-text-main)',
+                  minHeight: '36px'
                 }}
               >
                 {s.label}
@@ -98,7 +99,7 @@ export default function BankTab({ bank }) {
       </div>
 
       {/* Main Bank Item Grid */}
-      <div className="glass-panel" style={{ gridColumn: 'span 8', padding: '1.25rem', maxHeight: '640px', overflowY: 'auto' }}>
+      <div className="glass-panel bank-main-col" style={{ padding: '1.25rem', maxHeight: '640px', overflowY: 'auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(52px, 1fr))', gap: '0.6rem' }}>
           {filteredItems.map((item) => (
             <div
@@ -108,7 +109,8 @@ export default function BankTab({ bank }) {
                 width: '52px',
                 height: '52px',
                 border: selectedItem?.slot === item.slot ? '2px solid var(--color-gold)' : '1px solid rgba(229,192,123,0.15)',
-                background: selectedItem?.slot === item.slot ? 'rgba(229,192,123,0.15)' : 'rgba(15,18,26,0.9)'
+                background: selectedItem?.slot === item.slot ? 'rgba(229,192,123,0.15)' : 'rgba(15,18,26,0.9)',
+                cursor: 'pointer'
               }}
               onClick={() => setSelectedItem(item)}
               title={`${item.name} (${item.quantity.toLocaleString()})`}
@@ -127,7 +129,7 @@ export default function BankTab({ bank }) {
       </div>
 
       {/* Item Details Inspector Panel */}
-      <div className="glass-panel" style={{ gridColumn: 'span 4', padding: '1.5rem' }}>
+      <div className="glass-panel bank-side-col" style={{ padding: '1.5rem' }}>
         <h3 style={{ fontSize: '1.1rem', marginBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
           Item Inspector
         </h3>

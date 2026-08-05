@@ -23,7 +23,7 @@ export default function CollectionLogTab({ collectionLog }) {
   const items = currentCategoryData.items || [];
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem' }}>
+    <div className="collection-log-layout">
       
       {/* Header Banner */}
       <div className="glass-panel" style={{ gridColumn: 'span 12', padding: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
@@ -46,7 +46,7 @@ export default function CollectionLogTab({ collectionLog }) {
       {/* Main Collection Log Tabs */}
       {mainTabKeys.length > 0 ? (
         <>
-          <div className="glass-panel" style={{ gridColumn: 'span 12', padding: '0.75rem', display: 'flex', gap: '0.5rem' }}>
+          <div className="glass-panel" style={{ gridColumn: 'span 12', padding: '0.75rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap', overflowX: 'auto' }}>
             {mainTabKeys.map(tabName => (
               <button
                 key={tabName}
@@ -57,7 +57,8 @@ export default function CollectionLogTab({ collectionLog }) {
                   fontSize: '0.9rem',
                   fontWeight: selectedMainTab === tabName ? 600 : 400,
                   background: selectedMainTab === tabName ? 'var(--color-gold)' : 'transparent',
-                  color: selectedMainTab === tabName ? '#0d1017' : 'var(--color-text-main)'
+                  color: selectedMainTab === tabName ? '#0d1017' : 'var(--color-text-main)',
+                  minHeight: '40px'
                 }}
               >
                 {tabName}
@@ -66,7 +67,7 @@ export default function CollectionLogTab({ collectionLog }) {
           </div>
 
           {/* Sub-Category Selector Sidebar & Item Grid */}
-          <div className="glass-panel" style={{ gridColumn: 'span 4', padding: '1.25rem', maxHeight: '560px', overflowY: 'auto' }}>
+          <div className="glass-panel collection-log-sidebar" style={{ padding: '1.25rem', maxHeight: '560px', overflowY: 'auto' }}>
             <h3 style={{ fontSize: '1rem', color: 'var(--color-text-muted)', marginBottom: '0.75rem' }}>
               Categories ({categoryNames.length})
             </h3>
@@ -90,7 +91,8 @@ export default function CollectionLogTab({ collectionLog }) {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      border: isSelected ? '1px solid rgba(229,192,123,0.3)' : '1px solid rgba(255,255,255,0.03)'
+                      border: isSelected ? '1px solid rgba(229,192,123,0.3)' : '1px solid rgba(255,255,255,0.03)',
+                      minHeight: '40px'
                     }}
                   >
                     <span>{catName}</span>
@@ -104,15 +106,15 @@ export default function CollectionLogTab({ collectionLog }) {
           </div>
 
           {/* Item Grid Display */}
-          <div className="glass-panel" style={{ gridColumn: 'span 8', padding: '1.5rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
+          <div className="glass-panel collection-log-main" style={{ padding: '1.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
               <h3 style={{ fontSize: '1.2rem', margin: 0 }}>{selectedCategory}</h3>
               <span className="badge badge-gold">
                 Obtained: {currentCategoryData.obtained_count} / {currentCategoryData.total_items}
               </span>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))', gap: '1rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(90px, 1fr))', gap: '0.75rem' }}>
               {items.map(item => (
                 <div
                   key={item.id}

@@ -8,7 +8,7 @@ export default function DiariesTab({ diaries }) {
   const regions = Object.keys(diaryData);
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem' }}>
+    <div className="diaries-layout">
       
       {/* Header Banner */}
       <div className="glass-panel" style={{ gridColumn: 'span 12', padding: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
@@ -29,7 +29,7 @@ export default function DiariesTab({ diaries }) {
       </div>
 
       {/* 12 Regions Grid */}
-      <div style={{ gridColumn: 'span 12', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
+      <div className="diaries-grid">
         {regions.map(regionName => {
           const reg = diaryData[regionName];
           const tiers = ['easy', 'medium', 'hard', 'elite'];

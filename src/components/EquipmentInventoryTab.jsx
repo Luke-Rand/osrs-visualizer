@@ -21,10 +21,10 @@ export default function EquipmentInventoryTab({ equipment, inventory }) {
   });
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem' }}>
+    <div className="equipment-inventory-layout">
       
       {/* Left: Authentic Equipment Paperdoll */}
-      <div className="glass-panel" style={{ gridColumn: 'span 6', padding: '1.5rem' }}>
+      <div className="glass-panel equipment-col" style={{ padding: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <Shield color="var(--color-gold)" size={24} />
@@ -70,10 +70,11 @@ export default function EquipmentInventoryTab({ equipment, inventory }) {
         {/* List view of equipped items */}
         <div style={{ marginTop: '1.5rem', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '1rem' }}>
           <h4 style={{ fontSize: '0.9rem', color: 'var(--color-text-muted)', marginBottom: '0.75rem' }}>Equipped Items Summary</h4>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: '0.5rem' }}>
             {eqItems.map(item => (
               <div 
                 key={item.slot}
+                onClick={() => setHoveredItem(item)}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -81,7 +82,8 @@ export default function EquipmentInventoryTab({ equipment, inventory }) {
                   background: 'rgba(0,0,0,0.3)',
                   padding: '0.4rem 0.6rem',
                   borderRadius: '6px',
-                  fontSize: '0.8rem'
+                  fontSize: '0.8rem',
+                  cursor: 'pointer'
                 }}
               >
                 <img src={getItemIconUrl(item.id)} alt={item.name} style={{ width: '24px', height: '24px' }} />
@@ -94,7 +96,7 @@ export default function EquipmentInventoryTab({ equipment, inventory }) {
       </div>
 
       {/* Right: Authentic 28-slot Inventory Grid */}
-      <div className="glass-panel" style={{ gridColumn: 'span 6', padding: '1.5rem' }}>
+      <div className="glass-panel inventory-col" style={{ padding: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <Package color="var(--color-gold)" size={24} />
@@ -104,6 +106,7 @@ export default function EquipmentInventoryTab({ equipment, inventory }) {
 
         {/* 4 columns x 7 rows Inventory Grid */}
         <div 
+          className="inventory-grid-box"
           style={{ 
             display: 'grid', 
             gridTemplateColumns: 'repeat(4, 1fr)', 
@@ -122,9 +125,10 @@ export default function EquipmentInventoryTab({ equipment, inventory }) {
               <div
                 key={slotIndex}
                 className="item-slot"
-                style={{ width: '52px', height: '52px' }}
+                style={{ width: '52px', height: '52px', cursor: item ? 'pointer' : 'default' }}
                 onMouseEnter={() => item && setHoveredItem(item)}
                 onMouseLeave={() => setHoveredItem(null)}
+                onClick={() => item && setHoveredItem(item)}
               >
                 {item ? (
                   <>
@@ -139,7 +143,7 @@ export default function EquipmentInventoryTab({ equipment, inventory }) {
           })}
         </div>
 
-        {/* Hovered Item Info Bar */}
+        {/* Hovered/Selected Item Info Bar */}
         <div style={{ marginTop: '1.5rem', background: 'rgba(0,0,0,0.3)', padding: '0.85rem', borderRadius: '8px', border: '1px solid rgba(229,192,123,0.1)', minHeight: '60px', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           {hoveredItem ? (
             <>
@@ -153,7 +157,7 @@ export default function EquipmentInventoryTab({ equipment, inventory }) {
             </>
           ) : (
             <div style={{ fontSize: '0.8rem', color: 'var(--color-text-dim)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <Info size={16} /> Hover over an item to view details
+              <Info size={16} /> Tap or hover over an item to view details
             </div>
           )}
         </div>
@@ -168,9 +172,10 @@ function EquipmentSlot({ slotMeta, item, onHover }) {
   return (
     <div
       className="item-slot"
-      style={{ width: '54px', height: '54px' }}
+      style={{ width: '54px', height: '54px', cursor: item ? 'pointer' : 'default' }}
       onMouseEnter={() => item && onHover(item)}
       onMouseLeave={() => onHover(null)}
+      onClick={() => item && onHover(item)}
     >
       {item ? (
         <>

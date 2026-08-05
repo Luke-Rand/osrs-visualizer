@@ -150,7 +150,7 @@ export default function App() {
       />
 
       {/* Navigation Tab Bar */}
-      <nav className="glass-panel" style={{ padding: '0.6rem 0.8rem', marginBottom: '1.5rem', display: 'flex', gap: '0.4rem', overflowX: 'auto' }}>
+      <nav className="glass-panel nav-tab-container">
         {TABS.map(t => {
           const Icon = t.icon;
           const isActive = activeTab === t.id;
@@ -158,18 +158,12 @@ export default function App() {
             <button
               key={t.id}
               onClick={() => setActiveTab(t.id)}
+              className="nav-tab-button"
               style={{
-                padding: '0.6rem 1rem',
-                borderRadius: '8px',
-                fontSize: '0.88rem',
                 fontWeight: isActive ? 600 : 400,
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.55rem',
                 background: isActive ? 'linear-gradient(135deg, rgba(229,192,123,0.2), rgba(18,22,33,0.9))' : 'transparent',
                 color: isActive ? 'var(--color-gold)' : 'var(--color-text-main)',
-                border: isActive ? '1px solid rgba(229,192,123,0.35)' : '1px solid transparent',
-                whiteSpace: 'nowrap'
+                border: isActive ? '1px solid rgba(229,192,123,0.35)' : '1px solid transparent'
               }}
             >
               <Icon size={18} color={isActive ? 'var(--color-gold)' : 'var(--color-text-muted)'} />

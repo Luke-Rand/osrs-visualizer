@@ -20,10 +20,10 @@ export default function QuestsTab({ quests }) {
   const completionPercent = totalQuests > 0 ? Math.round((summary.finished / totalQuests) * 100) : 0;
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem' }}>
+    <div className="quests-layout">
       
       {/* Top Summary Banner */}
-      <div className="glass-panel" style={{ gridColumn: 'span 12', padding: '1.5rem' }}>
+      <div className="glass-panel quests-full-col" style={{ padding: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <Scroll color="var(--color-gold)" size={28} />
@@ -35,7 +35,7 @@ export default function QuestsTab({ quests }) {
             </div>
           </div>
 
-          <div style={{ minWidth: '280px' }}>
+          <div style={{ flex: '1 1 240px', maxWidth: '340px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.4rem' }}>
               <span style={{ color: 'var(--color-text-muted)' }}>Quest Completion Rate</span>
               <span style={{ fontWeight: 700, color: 'var(--color-gold)', fontFamily: 'var(--font-mono)' }}>{completionPercent}%</span>
@@ -48,10 +48,10 @@ export default function QuestsTab({ quests }) {
       </div>
 
       {/* Controls & Quest Grid List */}
-      <div className="glass-panel" style={{ gridColumn: 'span 12', padding: '1.5rem' }}>
+      <div className="glass-panel quests-full-col" style={{ padding: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
           
-          <div style={{ position: 'relative', minWidth: '280px' }}>
+          <div style={{ position: 'relative', flex: '1 1 240px', minWidth: '200px' }}>
             <Search size={16} color="var(--color-text-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
             <input
               type="text"
@@ -71,7 +71,7 @@ export default function QuestsTab({ quests }) {
             />
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
             {[
               { id: 'ALL', label: `All (${questList.length})` },
               { id: 'FINISHED', label: `Finished (${summary.finished})` },
@@ -88,7 +88,8 @@ export default function QuestsTab({ quests }) {
                   fontWeight: statusFilter === tab.id ? 600 : 400,
                   background: statusFilter === tab.id ? 'var(--color-gold)' : 'rgba(0,0,0,0.3)',
                   color: statusFilter === tab.id ? '#0d1017' : 'var(--color-text-main)',
-                  border: '1px solid rgba(255,255,255,0.06)'
+                  border: '1px solid rgba(255,255,255,0.06)',
+                  minHeight: '36px'
                 }}
               >
                 {tab.label}
@@ -99,7 +100,7 @@ export default function QuestsTab({ quests }) {
         </div>
 
         {/* Quest List */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '0.75rem', maxHeight: '560px', overflowY: 'auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '0.75rem', maxHeight: '560px', overflowY: 'auto' }}>
           {filteredQuests.map((quest) => {
             const isFinished = quest.state === 'FINISHED';
             const isInProgress = quest.state === 'IN_PROGRESS';
@@ -114,7 +115,8 @@ export default function QuestsTab({ quests }) {
                   border: isFinished ? '1px solid rgba(78, 175, 84, 0.2)' : isInProgress ? '1px solid rgba(52, 152, 219, 0.3)' : '1px solid rgba(255,255,255,0.05)',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between'
+                  justifyContent: 'space-between',
+                  gap: '0.5rem'
                 }}
               >
                 <div style={{ fontSize: '0.9rem', fontWeight: 500, color: isFinished ? '#fff' : 'var(--color-text-muted)' }}>

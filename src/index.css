@@ -215,3 +215,276 @@ button {
   pointer-events: none;
   z-index: 100;
 }
+
+/* ==========================================================================
+   RESPONSIVE GRID SYSTEM & MOBILE STYLING UTILITIES
+   ========================================================================== */
+
+/* App Header & Navigation Bar */
+.nav-tab-container {
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+}
+.nav-tab-container::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.nav-tab-button {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  white-space: nowrap;
+  min-height: 44px; /* Touch target accessibility */
+  flex-shrink: 0;
+  touch-action: manipulation;
+}
+
+/* Responsive Layout Grids */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+.overview-main-col {
+  grid-column: span 8;
+}
+.overview-side-col {
+  grid-column: span 4;
+}
+.overview-full-col {
+  grid-column: span 12;
+}
+
+.combat-breakdown-stats {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.combat-math-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
+
+.milestone-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.skills-layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+.skills-main-col {
+  grid-column: span 8;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.skills-side-col {
+  grid-column: span 4;
+}
+
+.equipment-inventory-layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+.equipment-col {
+  grid-column: span 6;
+}
+.inventory-col {
+  grid-column: span 6;
+}
+
+.bank-layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+.bank-main-col {
+  grid-column: span 8;
+}
+.bank-side-col {
+  grid-column: span 4;
+}
+
+.quests-layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+.quests-full-col {
+  grid-column: span 12;
+}
+
+.diaries-layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+.diaries-grid {
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.combat-achievements-layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+.combat-tiers-grid {
+  grid-column: span 12;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.75rem;
+}
+
+.collection-log-layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+}
+.collection-log-sidebar {
+  grid-column: span 4;
+}
+.collection-log-main {
+  grid-column: span 8;
+}
+
+/* Touch feedback for mobile buttons */
+button:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+.item-slot:active {
+  border-color: var(--color-gold);
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   MEDIA QUERIES FOR TABLET AND MOBILE DEVICES
+   ========================================================================== */
+
+/* Tablet & Mobile (<= 1024px) */
+@media (max-width: 1024px) {
+  .overview-main-col,
+  .overview-side-col,
+  .skills-main-col,
+  .skills-side-col,
+  .equipment-col,
+  .inventory-col,
+  .bank-main-col,
+  .bank-side-col,
+  .collection-log-sidebar,
+  .collection-log-main {
+    grid-column: span 12 !important;
+  }
+
+  .skills-main-col {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .diaries-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .combat-tiers-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .milestone-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Small Tablet & Mobile (<= 768px) */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 0.75rem !important;
+  }
+
+  .combat-breakdown-stats {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .combat-math-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .milestone-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .diaries-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .combat-tiers-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Make header elements responsive */
+  .header-main-flex {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1rem !important;
+  }
+  .header-stats-wrapper {
+    width: 100% !important;
+    justify-content: space-between !important;
+  }
+
+  /* Modal responsiveness */
+  .modal-dialog {
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+  }
+}
+
+/* Mobile Screens (<= 480px) */
+@media (max-width: 480px) {
+  .app-container {
+    padding: 0.5rem !important;
+  }
+
+  .skills-main-col {
+    grid-template-columns: 1fr !important;
+  }
+
+  .combat-breakdown-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .nav-tab-button span {
+    font-size: 0.8rem !important;
+  }
+
+  /* Inventory Grid Scaling for small screens */
+  .inventory-grid-box {
+    max-width: 100% !important;
+    gap: 0.4rem !important;
+    padding: 0.75rem !important;
+  }
+
+  .inventory-grid-box .item-slot {
+    width: 44px !important;
+    height: 44px !important;
+  }
+}
+

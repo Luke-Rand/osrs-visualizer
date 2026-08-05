@@ -15,7 +15,7 @@ export default function SkillsTab({ character }) {
   const skillProgress = getSkillProgress(currentSkillData.experience, currentSkillData.real_level);
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem' }}>
+    <div className="skills-layout">
       
       {/* Skill Selector Controls & Overview Header */}
       <div className="glass-panel" style={{ gridColumn: 'span 12', padding: '1.25rem 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
@@ -29,8 +29,8 @@ export default function SkillsTab({ character }) {
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(0,0,0,0.3)', padding: '0.25rem 0.5rem', borderRadius: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(0,0,0,0.3)', padding: '0.25rem 0.5rem', borderRadius: '8px', flexWrap: 'wrap' }}>
             <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', paddingRight: '0.3rem' }}>Display:</span>
             {[
               { id: 'real', label: 'Real Lvl' },
@@ -46,7 +46,8 @@ export default function SkillsTab({ character }) {
                   fontSize: '0.75rem',
                   fontWeight: levelMode === m.id ? 600 : 400,
                   background: levelMode === m.id ? 'var(--color-gold)' : 'transparent',
-                  color: levelMode === m.id ? '#0e1118' : 'var(--color-text-main)'
+                  color: levelMode === m.id ? '#0e1118' : 'var(--color-text-main)',
+                  minHeight: '36px'
                 }}
               >
                 {m.label}
@@ -62,7 +63,7 @@ export default function SkillsTab({ character }) {
       </div>
 
       {/* Main 24 Skills Grid */}
-      <div style={{ gridColumn: 'span 8', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem' }}>
+      <div className="skills-main-col">
         {OSRS_SKILLS.map(skill => {
           const sData = stats[skill.name] || { real_level: 1, boosted_level: 1, experience: 0 };
           const pInfo = getSkillProgress(sData.experience, sData.real_level);
@@ -134,7 +135,7 @@ export default function SkillsTab({ character }) {
       </div>
 
       {/* Selected Skill Detail Inspector Panel */}
-      <div className="glass-panel" style={{ gridColumn: 'span 4', padding: '1.5rem' }}>
+      <div className="glass-panel skills-side-col" style={{ padding: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '1rem', marginBottom: '1.25rem' }}>
           <img src={skillMeta.icon} alt={selectedSkill} style={{ width: '36px', height: '36px' }} />
           <div>

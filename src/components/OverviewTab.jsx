@@ -14,11 +14,11 @@ export default function OverviewTab({ character, equipment, quests, diaries, com
   });
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem' }}>
+    <div className="overview-grid">
       
       {/* 1. Combat Calculator & Breakdown */}
-      <div className="glass-panel" style={{ gridColumn: 'span 8', padding: '1.5rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+      <div className="glass-panel overview-main-col" style={{ padding: '1.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '0.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <Sword color="var(--color-gold)" size={24} />
             <h2 style={{ fontSize: '1.3rem', margin: 0 }}>Combat Breakdown</h2>
@@ -28,7 +28,7 @@ export default function OverviewTab({ character, equipment, quests, diaries, com
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.75rem', marginBottom: '1.5rem' }}>
+        <div className="combat-breakdown-stats">
           {[
             { name: 'Attack', val: combatDetails.atk, color: '#e74c3c' },
             { name: 'Strength', val: combatDetails.str, color: '#e67e22' },
@@ -46,7 +46,7 @@ export default function OverviewTab({ character, equipment, quests, diaries, com
         </div>
 
         {/* Formula Math Card */}
-        <div style={{ background: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(229,192,123,0.1)', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', textAlign: 'center' }}>
+        <div className="combat-math-grid" style={{ background: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(229,192,123,0.1)' }}>
           <div>
             <div style={{ fontSize: '0.75rem', color: 'var(--color-text-dim)' }}>Base Rating</div>
             <div style={{ fontSize: '1.1rem', fontWeight: 600, color: '#fff', fontFamily: 'var(--font-mono)' }}>{combatDetails.base}</div>
@@ -67,7 +67,7 @@ export default function OverviewTab({ character, equipment, quests, diaries, com
       </div>
 
       {/* 2. Equipment Paperdoll Mini-Preview */}
-      <div className="glass-panel" style={{ gridColumn: 'span 4', padding: '1.5rem' }}>
+      <div className="glass-panel overview-side-col" style={{ padding: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Shield color="var(--color-gold)" size={20} />
@@ -101,10 +101,10 @@ export default function OverviewTab({ character, equipment, quests, diaries, com
       </div>
 
       {/* 3. Account Highlights & Accomplishments */}
-      <div className="glass-panel" style={{ gridColumn: 'span 12', padding: '1.5rem' }}>
+      <div className="glass-panel overview-full-col" style={{ padding: '1.5rem' }}>
         <h3 style={{ fontSize: '1.2rem', marginBottom: '1.25rem' }}>Account Milestone Summaries</h3>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.25rem' }}>
+        <div className="milestone-grid">
           
           {/* Quests Summary Card */}
           <div 

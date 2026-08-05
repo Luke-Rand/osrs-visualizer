@@ -21,7 +21,7 @@ export default function CombatAchievementsTab({ combatAchievements }) {
   const tierKeys = ['easy', 'medium', 'hard', 'elite', 'master', 'grandmaster'];
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', gap: '1.5rem' }}>
+    <div className="combat-achievements-layout">
       
       {/* Header Banner */}
       <div className="glass-panel" style={{ gridColumn: 'span 12', padding: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
@@ -42,7 +42,7 @@ export default function CombatAchievementsTab({ combatAchievements }) {
       </div>
 
       {/* Tier Selector Row */}
-      <div className="glass-panel" style={{ gridColumn: 'span 12', padding: '1.25rem', display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '0.75rem' }}>
+      <div className="glass-panel combat-tiers-grid" style={{ padding: '1.25rem' }}>
         {tierKeys.map(key => {
           const t = tiers[key] || { complete: false, tasks_completed: 0, tasks_total: 0 };
           const isSelected = selectedTier === key;
@@ -58,7 +58,8 @@ export default function CombatAchievementsTab({ combatAchievements }) {
                 borderRadius: '8px',
                 border: isSelected ? `2px solid var(--tier-${key})` : '1px solid rgba(255,255,255,0.05)',
                 textAlign: 'center',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                minHeight: '44px'
               }}
             >
               <div style={{ fontSize: '0.8rem', textTransform: 'capitalize', fontWeight: 700, color: `var(--tier-${key})`, marginBottom: '0.2rem' }}>
@@ -78,7 +79,7 @@ export default function CombatAchievementsTab({ combatAchievements }) {
       {/* Task List Panel */}
       <div className="glass-panel" style={{ gridColumn: 'span 12', padding: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '1rem' }}>
-          <div style={{ position: 'relative', minWidth: '280px' }}>
+          <div style={{ position: 'relative', flex: '1 1 240px', minWidth: '200px' }}>
             <Search size={16} color="var(--color-text-muted)" style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)' }} />
             <input
               type="text"
@@ -98,7 +99,7 @@ export default function CombatAchievementsTab({ combatAchievements }) {
             />
           </div>
 
-          <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
             {[
               { id: 'ALL', label: `All (${tasks.length})` },
               { id: 'COMPLETED', label: `Completed (${currentTierData.tasks_completed})` },
@@ -113,7 +114,8 @@ export default function CombatAchievementsTab({ combatAchievements }) {
                   fontSize: '0.8rem',
                   fontWeight: statusFilter === f.id ? 600 : 400,
                   background: statusFilter === f.id ? `var(--tier-${selectedTier})` : 'rgba(0,0,0,0.3)',
-                  color: statusFilter === f.id ? '#0d1017' : 'var(--color-text-main)'
+                  color: statusFilter === f.id ? '#0d1017' : 'var(--color-text-main)',
+                  minHeight: '36px'
                 }}
               >
                 {f.label}
@@ -123,7 +125,7 @@ export default function CombatAchievementsTab({ combatAchievements }) {
         </div>
 
         {/* Task Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '0.75rem', maxHeight: '520px', overflowY: 'auto' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '0.75rem', maxHeight: '520px', overflowY: 'auto' }}>
           {filteredTasks.map(task => (
             <div
               key={task.id}

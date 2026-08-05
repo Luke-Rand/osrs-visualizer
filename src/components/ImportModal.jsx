@@ -51,14 +51,14 @@ export default function ImportModal({ isOpen, onClose, onImportData }) {
       zIndex: 1000,
       padding: '1rem'
     }}>
-      <div className="glass-panel" style={{ width: '100%', maxWidth: '560px', padding: '1.75rem', background: '#121622', border: '1px solid rgba(229,192,123,0.3)' }}>
+      <div className="glass-panel modal-dialog" style={{ width: '100%', maxWidth: '560px', padding: '1.5rem', background: '#121622', border: '1px solid rgba(229,192,123,0.3)', maxHeight: '90vh', overflowY: 'auto' }}>
         
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
             <Upload color="var(--color-gold)" size={22} />
-            <h3 style={{ fontSize: '1.3rem', margin: 0 }}>Import Character Export JSON</h3>
+            <h3 style={{ fontSize: '1.2rem', margin: 0 }}>Import Character Export JSON</h3>
           </div>
-          <button onClick={onClose} style={{ color: 'var(--color-text-muted)' }}>
+          <button onClick={onClose} style={{ color: 'var(--color-text-muted)', minHeight: '36px', minWidth: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <X size={20} />
           </button>
         </div>
