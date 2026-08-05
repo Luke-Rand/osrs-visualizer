@@ -63,6 +63,48 @@ The application dynamically detects your system's user home directory across all
 
 ---
 
+## 📡 API Endpoints & HTTP Import
+
+You can submit or update character JSON files programmatically via POST requests:
+
+### 1. Direct File Endpoint (`POST /api/accounts/:name/files/:filename`)
+
+Saves a specific JSON file for an account.
+
+```bash
+curl -X POST http://localhost:3001/api/accounts/Zezima/files/character.json \
+  -H "Content-Type: application/json" \
+  -d '{
+    "account_name": "Zezima",
+    "world": 301,
+    "game_state": "LOGGED_IN",
+    "stats": {
+      "Attack": { "real_level": 99, "boosted_level": 99, "experience": 13034431 },
+      "Strength": { "real_level": 99, "boosted_level": 99, "experience": 13034431 }
+    }
+  }'
+```
+
+### 2. Auto-Detecting Export Endpoint (`POST /api/export`)
+
+Automatically determines filename from payload properties (`kind`, `stats`, `summary`, etc.) and writes to the account folder.
+
+```bash
+curl -X POST http://localhost:3001/api/export \
+  -H "Content-Type: application/json" \
+  -d '{
+    "account_name": "Zezima",
+    "kind": "bank",
+    "item_count": 1,
+    "items": [
+      { "slot": 0, "id": 4151, "quantity": 1, "name": "Abyssal whip" }
+    ]
+  }'
+```
+
+
+---
+
 ## 🛠️ Data Source
 
 Data is exported using the RuneLite plugin **character-export**:

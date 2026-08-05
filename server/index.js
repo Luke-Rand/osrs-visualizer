@@ -197,6 +197,96 @@ app.get('/api/watch', (req, res) => {
   });
 });
 
+// POST /api/accounts/:name/files/:filename - Save/update a specific character JSON file
+app.post('/api/accounts/:name/files/:filename', (req, res) => {
+  const { name, filename } = req.params;
+  const baseDir = getCharacterDir();
+  const charDir = path.join(baseDir, name);
+
+  if (!filename.endsWith('.json')) {
+    return res.status(400).json({ success: false, error: 'Filename must end with .json' });
+  }
+
+  try {
+    if (!fs.existsSync(charDir)) {
+      fs.mkdirSync(charDir, { recursive: true });
+    }
+
+    const filePath = path.join(charDir, filename);
+    const content = typeof req.body === 'string' ? req.body : JSON.stringify(req.body, null, 2);
+
+    fs.writeFileSync(filePath, content, 'utf-8');
+
+    res.json({
+      success: true,
+      message: `File '${filename}' for account '${name}' saved successfully.`,
+      accountName: name,
+      filename,
+      filePath
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// POST /api/export - Generic endpoint for posting character export JSON payloads
+app.post('/api/export', (req, res) => {
+  const body = req.body || {};
+
+  const accountName = body.accountName || body.account_name || body.character?.account_name || req.query.account;
+  if (!accountName) {
+    return res.status(400).json({
+      success: false,
+      error: "Missing account identifier. Provide 'accountName' or 'account_name' in JSON body or '?account=' query parameter."
+    });
+  }
+
+  let filename = body.filename || req.query.filename;
+  let data = body.data || body;
+
+  if (!filename) {
+    if (body.kind) {
+      filename = `${body.kind}.json`;
+    } else if (body.stats) {
+      filename = 'character.json';
+    } else if (body.summary?.finished !== undefined) {
+      filename = 'quests.json';
+    } else if (body.summary?.tiers_complete !== undefined) {
+      filename = 'diaries.json';
+    } else if (body.summary?.total_tasks_completed !== undefined) {
+      filename = 'combat_achievements.json';
+    } else if (body.entries_scraped !== undefined || body.tabs) {
+      filename = 'collection_log.json';
+    } else {
+      filename = 'export.json';
+    }
+  }
+
+  const baseDir = getCharacterDir();
+  const charDir = path.join(baseDir, accountName);
+
+  try {
+    if (!fs.existsSync(charDir)) {
+      fs.mkdirSync(charDir, { recursive: true });
+    }
+
+    const filePath = path.join(charDir, filename);
+    const content = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+
+    fs.writeFileSync(filePath, content, 'utf-8');
+
+    res.json({
+      success: true,
+      message: `Export file '${filename}' for account '${accountName}' saved successfully.`,
+      accountName,
+      filename,
+      filePath
+    });
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`OSRS Character Visualizer API server running on http://localhost:${PORT}`);
   console.log(`Monitoring directory: ${getCharacterDir()}`);
