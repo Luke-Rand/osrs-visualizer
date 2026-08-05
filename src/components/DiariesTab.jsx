@@ -18,16 +18,16 @@ export default function DiariesTab({ diaries }) {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
               <h2 style={{ fontSize: '1.4rem', margin: 0 }}>Achievement Diaries</h2>
-              <a
-                href="https://oldschool.runescape.wiki/w/Achievement_Diary"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="wiki-btn"
-                title="View Achievement Diary Guide on OSRS Wiki"
-              >
-                <span>Diary Wiki</span>
-                <ExternalLink size={12} />
-              </a>
+                <a
+                  href="https://oldschool.runescape.wiki/w/Achievement_Diary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="wiki-icon-btn"
+                  title="View Achievement Diary Guide on OSRS Wiki"
+                  style={{ width: '32px', height: '32px' }}
+                >
+                  <BookOpen size={16} />
+                </a>
             </div>
             <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
               Track regional task completions across Easy, Medium, Hard, and Elite tiers

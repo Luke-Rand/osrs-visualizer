@@ -186,13 +186,10 @@ export default function Header({ accounts, currentAccount, onSelectAccount, onRe
               href="https://oldschool.runescape.wiki/"
               target="_blank"
               rel="noopener noreferrer"
-              className="wiki-btn"
+              className="wiki-icon-btn"
               title="Open Official OSRS Wiki"
-              style={{ minHeight: '38px', textDecoration: 'none' }}
             >
-              <BookOpen size={15} />
-              <span>OSRS Wiki</span>
-              <ExternalLink size={12} />
+              <BookOpen size={18} />
             </a>
 
             <button

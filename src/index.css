@@ -537,4 +537,28 @@ button:active {
   background: rgba(229, 192, 123, 0.15);
 }
 
+.wiki-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(229, 192, 123, 0.1);
+  color: var(--color-gold);
+  border: 1px solid rgba(229, 192, 123, 0.25);
+  transition: all 0.2s ease;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.wiki-icon-btn:hover {
+  background: rgba(229, 192, 123, 0.25);
+  color: #fff;
+  border-color: var(--color-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(229, 192, 123, 0.2);
+}
+
+
 

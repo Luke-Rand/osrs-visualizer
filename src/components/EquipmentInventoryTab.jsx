@@ -162,11 +162,11 @@ export default function EquipmentInventoryTab({ equipment, inventory }) {
                 href={getWikiUrl(hoveredItem.name)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="wiki-btn"
+                className="wiki-icon-btn"
                 title={`View ${hoveredItem.name} on OSRS Wiki`}
+                style={{ width: '32px', height: '32px' }}
               >
-                <span>Wiki</span>
-                <ExternalLink size={12} />
+                <ExternalLink size={15} />
               </a>
             </>
           ) : (

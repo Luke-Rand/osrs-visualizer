@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Trophy, CheckCircle2, Search, Filter, ExternalLink } from 'lucide-react';
+import { Trophy, CheckCircle2, Search, Filter, ExternalLink, BookOpen } from 'lucide-react';
 import { getWikiSearchUrl, getWikiUrl } from '../utils/osrsUtils';
 
 export default function CombatAchievementsTab({ combatAchievements }) {
@@ -35,11 +35,11 @@ export default function CombatAchievementsTab({ combatAchievements }) {
                 href="https://oldschool.runescape.wiki/w/Combat_Achievements"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="wiki-btn"
+                className="wiki-icon-btn"
                 title="View Combat Achievements Guide on OSRS Wiki"
+                style={{ width: '32px', height: '32px' }}
               >
-                <span>CA Wiki</span>
-                <ExternalLink size={12} />
+                <BookOpen size={16} />
               </a>
             </div>
             <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>

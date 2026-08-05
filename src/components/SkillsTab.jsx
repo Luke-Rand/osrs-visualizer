@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { OSRS_SKILLS, getSkillProgress, formatNumber, formatQuantity, getWikiUrl } from '../utils/osrsUtils';
-import { Zap, Award, Sparkles, TrendingUp, CheckCircle, ExternalLink } from 'lucide-react';
+import { Zap, Award, Sparkles, TrendingUp, CheckCircle, ExternalLink, BookOpen } from 'lucide-react';
 
 
 export default function SkillsTab({ character }) {
@@ -152,11 +152,10 @@ export default function SkillsTab({ character }) {
             href={getWikiUrl(selectedSkill)}
             target="_blank"
             rel="noopener noreferrer"
-            className="wiki-btn"
-            title={`View ${selectedSkill} training guide on OSRS Wiki`}
+            className="wiki-icon-btn"
+            title={`View ${selectedSkill} guide on OSRS Wiki`}
           >
-            <span>Wiki Guide</span>
-            <ExternalLink size={13} />
+            <BookOpen size={18} />
           </a>
         </div>
 

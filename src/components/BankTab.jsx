@@ -137,14 +137,26 @@ export default function BankTab({ bank }) {
 
         {selectedItem ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: '10px' }}>
-              <div className="item-slot" style={{ width: '60px', height: '60px' }}>
-                <img src={getItemIconUrl(selectedItem.id)} alt={selectedItem.name} style={{ width: '44px', height: '44px' }} />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(0,0,0,0.3)', padding: '1rem', borderRadius: '10px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div className="item-slot" style={{ width: '60px', height: '60px' }}>
+                  <img src={getItemIconUrl(selectedItem.id)} alt={selectedItem.name} style={{ width: '44px', height: '44px' }} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--color-gold)' }}>{selectedItem.name}</div>
+                  <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>Item ID: {selectedItem.id}</div>
+                </div>
               </div>
-              <div>
-                <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--color-gold)' }}>{selectedItem.name}</div>
-                <div style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>Item ID: {selectedItem.id}</div>
-              </div>
+
+              <a
+                href={getWikiUrl(selectedItem.name)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="wiki-icon-btn"
+                title={`View ${selectedItem.name} on OSRS Wiki`}
+              >
+                <ExternalLink size={16} />
+              </a>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
@@ -162,17 +174,6 @@ export default function BankTab({ bank }) {
                 </div>
               </div>
             </div>
-
-            <a
-              href={getWikiUrl(selectedItem.name)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="wiki-btn"
-              style={{ width: '100%', justifyContent: 'center', padding: '0.6rem 1rem', marginTop: '0.25rem' }}
-            >
-              <span>View {selectedItem.name} on OSRS Wiki</span>
-              <ExternalLink size={14} />
-            </a>
           </div>
         ) : (
           <div style={{ padding: '2rem 1rem', textAlign: 'center', color: 'var(--color-text-dim)', fontSize: '0.85rem' }}>

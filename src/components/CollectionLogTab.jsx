@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Compass, Sparkles, AlertCircle, ExternalLink } from 'lucide-react';
+import { Compass, Sparkles, AlertCircle, ExternalLink, BookOpen } from 'lucide-react';
 import { getItemIconUrl, getWikiUrl } from '../utils/osrsUtils';
 
 export default function CollectionLogTab({ collectionLog }) {
@@ -36,11 +36,11 @@ export default function CollectionLogTab({ collectionLog }) {
                 href="https://oldschool.runescape.wiki/w/Collection_Log"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="wiki-btn"
+                className="wiki-icon-btn"
                 title="View Collection Log Guide on OSRS Wiki"
+                style={{ width: '32px', height: '32px' }}
               >
-                <span>Log Wiki</span>
-                <ExternalLink size={12} />
+                <BookOpen size={16} />
               </a>
             </div>
             <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
@@ -127,12 +127,10 @@ export default function CollectionLogTab({ collectionLog }) {
                     href={getWikiUrl(selectedCategory)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="wiki-btn"
-                    style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem' }}
+                    className="wiki-link-icon"
                     title={`View ${selectedCategory} on OSRS Wiki`}
                   >
-                    <span>Wiki</span>
-                    <ExternalLink size={11} />
+                    <ExternalLink size={14} />
                   </a>
                 )}
               </div>

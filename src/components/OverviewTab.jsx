@@ -31,12 +31,10 @@ export default function OverviewTab({ character, equipment, quests, diaries, com
               href="https://oldschool.runescape.wiki/w/Combat_level"
               target="_blank"
               rel="noopener noreferrer"
-              className="wiki-btn"
-              style={{ padding: '0.25rem 0.6rem', fontSize: '0.75rem' }}
+              className="wiki-link-icon"
               title="View Combat Level Formula on OSRS Wiki"
             >
-              <span>Combat Wiki</span>
-              <ExternalLink size={11} />
+              <ExternalLink size={14} />
             </a>
           </div>
         </div>
@@ -217,10 +215,10 @@ export default function OverviewTab({ character, equipment, quests, diaries, com
             href="https://oldschool.runescape.wiki/"
             target="_blank"
             rel="noopener noreferrer"
-            className="wiki-btn"
+            className="wiki-icon-btn"
+            title="Visit OSRS Wiki Main Page"
           >
-            <span>Visit OSRS Wiki Main Page</span>
-            <ExternalLink size={13} />
+            <BookOpen size={18} />
           </a>
         </div>
 

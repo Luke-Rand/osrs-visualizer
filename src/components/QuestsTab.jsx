@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Scroll, Search, CheckCircle2, Clock, XCircle, ExternalLink } from 'lucide-react';
+import { Scroll, Search, CheckCircle2, Clock, XCircle, ExternalLink, BookOpen } from 'lucide-react';
 import { getWikiUrl } from '../utils/osrsUtils';
 
 export default function QuestsTab({ quests }) {
@@ -35,11 +35,11 @@ export default function QuestsTab({ quests }) {
                   href="https://oldschool.runescape.wiki/w/Quests/Guides"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="wiki-btn"
+                  className="wiki-icon-btn"
                   title="View Quest Guides on OSRS Wiki"
+                  style={{ width: '32px', height: '32px' }}
                 >
-                  <span>Quest Guides</span>
-                  <ExternalLink size={12} />
+                  <BookOpen size={16} />
                 </a>
               </div>
               <div style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
