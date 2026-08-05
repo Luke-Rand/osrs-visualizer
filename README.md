@@ -63,6 +63,23 @@ The application dynamically detects your system's user home directory across all
 
 ---
 
+## 🖥️ Cross-Platform Terminal TUI Tool
+
+We provide an interactive Terminal User Interface (TUI) tool to push local character JSON files to the API server from any device.
+
+```bash
+# Launch interactive TUI tool
+npm run tui
+```
+
+### TUI Features:
+- 📤 **Push Account(s)**: Select any local RuneLite account folder and post all JSON export files to the API server.
+- 📄 **Push Custom File**: Select any `.json` file on disk and push it to a chosen account on the API server.
+- ⚡ **Continuous Live Auto-Sync Mode**: Watch your local `.runelite/character-exporter` folder and automatically post JSON changes to the server in real-time as RuneLite writes them.
+- 🔍 **Test Connection**: Verify API server health and active account counts.
+- ⚙️ **Custom API Server URL**: Easily configure target API endpoints (e.g. `http://localhost:3001` or remote servers).
+
+
 ## 📡 API Endpoints & HTTP Import
 
 You can submit or update character JSON files programmatically via POST requests:

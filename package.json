@@ -3,10 +3,13 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "bin": "./bin/cli.js",
   "scripts": {
     "dev": "concurrently \"npm:server\" \"npm:client\"",
     "client": "vite",
     "server": "node server/index.js",
+    "tui": "node bin/cli.js",
+    "cli": "node bin/cli.js",
     "build": "vite build",
     "preview": "vite preview"
   },
