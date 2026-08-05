@@ -287,7 +287,17 @@ app.post('/api/export', (req, res) => {
   }
 });
 
+// Serve built static frontend files in production or containerized environments
+const distPath = path.join(process.cwd(), 'dist');
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api')) return next();
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+}
+
 app.listen(PORT, () => {
-  console.log(`OSRS Character Visualizer API server running on http://localhost:${PORT}`);
+  console.log(`OSRS Character Visualizer server running on http://localhost:${PORT}`);
   console.log(`Monitoring directory: ${getCharacterDir()}`);
 });

@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: osrs-visualizer
+  labels:
+    app: osrs-visualizer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: osrs-visualizer
+  template:
+    metadata:
+      labels:
+        app: osrs-visualizer
+    spec:
+      containers:
+        - name: osrs-visualizer
+          image: osrs-visualizer:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3001
+              name: http
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: PORT
+              value: "3001"
+            - name: OSRS_CHAR_DIR
+              value: "/app/character-exporter"
+          volumeMounts:
+            - name: char-storage
+              mountPath: /app/character-exporter
+          livenessProbe:
+            httpGet:
+              path: /api/accounts
+              port: 3001
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/accounts
+              port: 3001
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+      volumes:
+        - name: char-storage
+          persistentVolumeClaim:
+            claimName: osrs-char-pvc

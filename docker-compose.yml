@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  osrs-visualizer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: osrs-visualizer
+    ports:
+      - "3001:3001"
+    volumes:
+      # Mount host RuneLite character exporter directory to container
+      - ~/.runelite/character-exporter:/app/character-exporter
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - OSRS_CHAR_DIR=/app/character-exporter
+    restart: unless-stopped

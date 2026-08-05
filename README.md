@@ -159,8 +159,56 @@ Open [http://localhost:5173/](http://localhost:5173/) in your web browser.
 
 ---
 
+## 🐳 Containerization & Deployment
+
+### Option A: Docker Compose (Recommended)
+
+Build and start the application in containerized mode with volume mapping for your local `.runelite/character-exporter` directory:
+
+```bash
+# Build and run container in background
+docker compose up -d --build
+```
+
+Access the app at **[http://localhost:3001/](http://localhost:3001/)**.
+
+### Option B: Docker CLI
+
+```bash
+# Build Docker image
+docker build -t osrs-visualizer .
+
+# Run container with volume mount
+docker run -d \
+  -p 3001:3001 \
+  -v ~/.runelite/character-exporter:/app/character-exporter \
+  --name osrs-visualizer \
+  osrs-visualizer
+```
+
+---
+
+## ☸️ Kubernetes Deployment
+
+Deploy the application, persistent volume, and service into a Kubernetes cluster:
+
+```bash
+# Apply PVC, Deployment, and Service manifests
+kubectl apply -f k8s/pvc.yaml
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
+
+# Verify resources
+kubectl get pods -l app=osrs-visualizer
+kubectl get svc osrs-visualizer-service
+```
+
+---
+
 ## 🏗️ Tech Stack
 
 - **Frontend**: React 18, Vite 5, Vanilla CSS (Glassmorphism & OSRS Dark Aesthetics), Lucide Icons
 - **Backend**: Express.js (Node.js), Cors, Server-Sent Events (SSE)
+- **Containerization**: Docker (Multi-stage build), Docker Compose, Kubernetes (K8s)
 - **Item Assets**: RuneLite Static Cache Icon CDN (`https://static.runelite.net/cache/item/icon/{id}.png`) & OSRS Wiki Media
+
